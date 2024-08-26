@@ -21,6 +21,7 @@ namespace GaussianSplatting.Editor
         const string kPrefExportBake = "nesnausk.GaussianSplatting.ExportBakeTransform";
 
         SerializedProperty m_PropAsset;
+        SerializedProperty SDFAsset;
         SerializedProperty m_PropSplatScale;
         SerializedProperty m_PropOpacityScale;
         SerializedProperty m_PropSHOrder;
@@ -60,6 +61,7 @@ namespace GaussianSplatting.Editor
             m_ExportBakeTransform = EditorPrefs.GetBool(kPrefExportBake, false);
 
             m_PropAsset = serializedObject.FindProperty("m_Asset");
+            SDFAsset = serializedObject.FindProperty("SDFAsset");
             m_PropSplatScale = serializedObject.FindProperty("m_SplatScale");
             m_PropOpacityScale = serializedObject.FindProperty("m_OpacityScale");
             m_PropSHOrder = serializedObject.FindProperty("m_SHOrder");
@@ -92,6 +94,9 @@ namespace GaussianSplatting.Editor
 
             GUILayout.Label("Data Asset", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(m_PropAsset);
+
+            GUILayout.Label("SDF Asset", EditorStyles.boldLabel);
+            Editor
 
             if (!gs.HasValidAsset)
             {

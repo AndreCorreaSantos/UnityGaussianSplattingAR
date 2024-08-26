@@ -142,6 +142,9 @@ namespace GaussianSplatting.Runtime
                 mpb.SetInteger(GaussianSplatRenderer.Props.DisplayIndex, gs.m_RenderMode == GaussianSplatRenderer.RenderMode.DebugPointIndices ? 1 : 0);
                 mpb.SetInteger(GaussianSplatRenderer.Props.DisplayChunks, gs.m_RenderMode == GaussianSplatRenderer.RenderMode.DebugChunkBounds ? 1 : 0);
 
+                // SETTAR INFORMACOES DA SDF AQUI?
+                Debug.Log("teste");
+
                 cmb.BeginSample(s_ProfCalcView);
                 gs.CalcViewData(cmb, cam, matrix);
                 cmb.EndSample(s_ProfCalcView);
@@ -213,6 +216,8 @@ namespace GaussianSplatting.Runtime
             DebugChunkBounds,
         }
         public GaussianSplatAsset m_Asset;
+
+        public Transform sdf;
 
         [Range(0.1f, 2.0f)] [Tooltip("Additional scaling factor for the splats")]
         public float m_SplatScale = 1.0f;

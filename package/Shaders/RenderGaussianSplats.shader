@@ -102,6 +102,7 @@ half4 frag (v2f i) : SV_Target
     if (alpha < 1.0/255.0)
         discard;
 
+	i.col.rgb = float3(1.0,0.0,0.0);
     half4 res = half4(i.col.rgb * alpha, alpha);
     return res;
 }

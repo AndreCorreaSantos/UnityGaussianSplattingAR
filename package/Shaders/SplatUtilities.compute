@@ -182,6 +182,17 @@ bool IsSplatCut(float3 pos)
     return finalCut;
 }
 
+float3 _SDFPosition;
+float _SDFRadius;
+
+// receives world space position of the splat
+bool inSDF(float3 pos)
+{
+    float3 delta = pos - sdf_clip_pos.xyz;
+    float dist = dot(delta, delta);
+    return dist < _SDFRadius * _SDFRadius;
+}
+
 [numthreads(GROUP_SIZE,1,1)]
 void CSCalcViewData (uint3 id : SV_DispatchThreadID)
 {
@@ -193,6 +204,16 @@ void CSCalcViewData (uint3 id : SV_DispatchThreadID)
     SplatViewData view = (SplatViewData)0;
     
     float3 centerWorldPos = mul(_MatrixObjectToWorld, float4(splat.pos,1)).xyz;
+
+    if(_SDFRadius > 0)
+    {
+        centerWorldPos.w = -1.0; // discarding
+    }
+
+    if(inSDF(centerWorldPos))
+    {
+        centerWorldPos.w = -1.0; // discarding 
+    }
     float4 centerClipPos = mul(_MatrixVP, float4(centerWorldPos, 1));
     half opacityScale = _SplatOpacityScale;
     float splatScale = _SplatScale;
