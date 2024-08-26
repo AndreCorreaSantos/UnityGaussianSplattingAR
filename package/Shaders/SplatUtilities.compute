@@ -207,7 +207,7 @@ void CSCalcViewData (uint3 id : SV_DispatchThreadID)
 
     if(_SDFRadius > 0)
     {
-        centerWorldPos.w = -1.0; // discarding
+        view.npr = 1;
     }
 
     if(inSDF(centerWorldPos))
